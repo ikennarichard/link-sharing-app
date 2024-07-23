@@ -19,3 +19,23 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --han-purple: #633cff;
+  --nickel: #737373;
+  --coral-red: #ff3939;
+  --pale-violet: #beadff;
+  --light-silver: #d9d9d9;
+  --lavender: #efebff;
+  --lotion: #fafafa;
+  --dark-charcoal: #333333;
+  --white: #ffffff;
+}
+
+body {
+  font-size: 1rem;
+  background-color: var(--light-silver);
+}
