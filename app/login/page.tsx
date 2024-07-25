@@ -1,3 +1,5 @@
+'use client'
+
 import Link from "next/link";
 import Input from "../components/input";
 import LogoText from "../components/logo-text";
