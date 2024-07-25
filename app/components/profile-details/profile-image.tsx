@@ -1,22 +1,26 @@
 "use client";
 import UploadImage from "@/app/ui/icons/upload-image";
 import Image from "next/image";
-import { useState } from "react";
+import { ChangeEvent, useState } from "react";
 
 export default function ProfileImageUpload() {
-  const [image, setImage] = useState("");
+  const [image, setImage] = useState<string>("");
 
-  function handleChnage(e) {
-    const file = e.target.files[0];
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
 
     if (file) {
       const reader = new FileReader();
       reader.onloadend = () => {
-        setImage(reader.result);
+        if (typeof reader.result === 'string') {
+          setImage(reader.result);
+        } else {
+          console.error('FileReader result is not a string');
+        }
       };
       reader.readAsDataURL(file);
     }
-  }
+  };
   return (
     <div className="w-full h-[233px] bg-light-grey p-5 pr-0 flex items-center rounded-xl mt-6">
       <p className="w-[45%] text-grey text-[1rem] leading-6">Profile Picture</p>
@@ -26,7 +30,7 @@ export default function ProfileImageUpload() {
           <input
             type="file"
             hidden
-            onChange={handleChnage}
+            onChange={handleChange}
             id="profile_image"
           />
           <label
