@@ -11,16 +11,19 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import Input from "../input";
-
 import Github from "@/app/ui/icons/social/github";
 import Links from "@/app/ui/icons/link";
+import Input from "../input";
 
 export default function CustomizeLinks() {
   const [links, setLinks] = useState<string[]>([]);
 
   function handleAddLink() {
     setLinks([...links, "links"]);
+  }
+
+  function handleRemoveLink(item: number) {
+    links.splice(item, 1)
   }
   return (
     <form className="flex flex-col justify-between min-h-[700px]">
@@ -48,7 +51,7 @@ export default function CustomizeLinks() {
           {links.length !== 0 &&
             links.map((_, index) => (
               <Fragment key={index + 1}>
-                <SocialLinkForm count={index + 1} handle />
+                <SocialLinkForm count={index + 1} handleRemove={() => handleRemoveLink(index)} />
               </Fragment>
             ))}
         </div>
@@ -67,8 +70,8 @@ function SocialLinkForm({
   count: number;
   handleRemove: () => void;
 }) {
-  function removeLink(item: number) {
-    handleRemove(item);
+  function removeLink() {
+    handleRemove();
   }
   return (
     <div className="rounded-xl p-5 w-full gap-3 bg-light-grey">
@@ -78,7 +81,7 @@ function SocialLinkForm({
           Link #{count}
         </p>
         <button
-          onClick={() => removeLink(count - 1)}
+          onClick={() => removeLink()}
           className="text-[1rem] leading-6 text-nickel"
         >
           Remove
@@ -97,16 +100,18 @@ function SocialLinkForm({
           </SelectTrigger>
           <SelectContent className="bg-white">
             <SelectItem value="light">Light</SelectItem>
-            <SelectItem value="dark">Dark</SelectItem>
-            <SelectItem value="system">System</SelectItem>
           </SelectContent>
         </Select>
       </p>
-      <p className="mt-3 flex flex-col gap-1">
-        {/* <Input labelID="" label="Link" icon={<Links />}>
-
-        </Input> */}
-      </p>
+      <div className="mt-3 flex flex-col gap-1">
+        <Input labelFor="link" label="Link" icon={<Links />}>
+          <input
+            className={`text-[1rem] text-dark-grey leading-[1.5rem] bg-transparent w-full py-3 px-4 rounded-lg border-[1px] border-light-silver outline-none focus:border-han-purple focus:shadow-light pl-10`}
+            type='text'
+            id='link'
+          />
+        </Input>
+      </div>
     </div>
   );
 }
