@@ -1,8 +1,8 @@
-'use server'
+"use server";
 
-import { createClient } from "@/utils/supabase/server"
-import { revalidatePath } from "next/cache"
-import { redirect } from "next/navigation"
+import { createClient } from "@/utils/supabase/server";
+import { revalidatePath } from "next/cache";
+import { redirect } from "next/navigation";
 import { z } from "zod";
 
 const UserSchema = z.object({
@@ -27,17 +27,16 @@ export async function signup(formData: FormData) {
         email: data.email,
         password: data.password,
       });
-      
-    if (error) {
-      redirect('/error')
-    }
-    }
 
+      if (error) {
+        redirect("/error");
+      }
+    }
   } catch (e) {
-    console.error(e)
-    redirect('/error')
+    console.error(e);
+    redirect("/error");
   }
 
-  revalidatePath('/', 'layout')
-  redirect('/')
+  revalidatePath("/", "layout");
+  redirect("/");
 }
